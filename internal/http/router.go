@@ -16,8 +16,6 @@ func (h *Handler) RegisterRoutes() {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 		}
 	})
-
-	// CRUD по id
 	http.HandleFunc("/subscriptions/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
@@ -30,10 +28,7 @@ func (h *Handler) RegisterRoutes() {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 		}
 	})
-
-	// SUM
 	http.HandleFunc("/subscriptions/sum", h.Sum)
-	// Swagger
 	http.HandleFunc("/swagger", h.Swagger)
 
 }

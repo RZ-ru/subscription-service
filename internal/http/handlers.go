@@ -17,9 +17,6 @@ func NewHandler(s *service.SubscriptionService) *Handler {
 	return &Handler{service: s}
 }
 
-// ===================== UTILS =====================
-
-// парсим id из /subscriptions/123
 func extractID(path string) (int64, error) {
 	parts := strings.Split(strings.Trim(path, "/"), "/")
 	if len(parts) < 2 {
@@ -28,9 +25,6 @@ func extractID(path string) (int64, error) {
 	return strconv.ParseInt(parts[len(parts)-1], 10, 64)
 }
 
-// ===================== HANDLERS =====================
-
-// CREATE
 func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -61,7 +55,6 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]any{"id": id})
 }
 
-// READ
 func (h *Handler) Read(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -84,7 +77,6 @@ func (h *Handler) Read(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(sub)
 }
 
-// UPDATE
 func (h *Handler) Update(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -120,7 +112,6 @@ func (h *Handler) Update(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(204)
 }
 
-// DELETE
 func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -142,7 +133,6 @@ func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(204)
 }
 
-// LIST
 func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -180,7 +170,6 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(list)
 }
 
-// SUM
 func (h *Handler) Sum(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
