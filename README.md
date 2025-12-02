@@ -31,15 +31,26 @@ REST-сервис для хранения данных о пользовател
     │       └── main.go
     ├── internal/
     │   ├── config/
+    │   │   └── config.go
     │   ├── db/
     │   │   └── migrations/
+    │   │            ├── 001_init.up.sql
+    │   │            └── 001_init.down.sql
     │   ├── domain/
+    │   │   └── subscription.go
     │   ├── repository/
+    │   │   ├── subs_repo.go
+    │   │   └── subs_repo_interface.go
     │   ├── service/
+    │   │   └── subs_service.go
     │   └── http/
+    │       ├── handlers.go
+    │       ├── router.go
+    │       └── swagger.go
     ├── docs/
     │   └── swagger.yaml
     ├── logger/
+    │   └── logger.go
     ├── Dockerfile
     ├── docker-compose.yml
     └── .env
@@ -64,4 +75,5 @@ REST-сервис для хранения данных о пользовател
 
 Документация доступна по адресу:
 
-    http://localhost:8080/swagger
+    http://localhost:8080/docs/ - документация с UI
+    http://localhost:8080/swagger - код
