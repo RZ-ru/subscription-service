@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/joho/godotenv/autoload"
 	_ "github.com/lib/pq"
@@ -35,6 +36,16 @@ func main() {
 		log.Fatal(err)
 	}
 	defer db.Close()
+
+	// Миграции
+	migration, err := os.ReadFile("internal/db/migrations/001_init.up.sql")
+	if err != nil {
+		log.Fatal("cannot read migration: ", err)
+	}
+	_, err = db.Exec(string(migration))
+	if err != nil {
+		log.Fatal("migration failed: ", err)
+	}
 
 	// Репозиторий
 	repo := repository.NewPostgresSubscriptionRepository(db)
