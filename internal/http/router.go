@@ -30,5 +30,10 @@ func (h *Handler) RegisterRoutes() {
 	})
 	http.HandleFunc("/subscriptions/sum", h.Sum)
 	http.HandleFunc("/swagger", h.Swagger)
+	http.Handle("/docs/",
+		http.StripPrefix("/docs/",
+			http.FileServer(http.Dir("./docs/swagger-ui")),
+		),
+	)
 
 }
