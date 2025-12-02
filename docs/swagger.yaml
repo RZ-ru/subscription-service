@@ -3,7 +3,9 @@ info:
   title: Subscriptions Service API
   version: 1.0.0
   description: REST-сервис для управления подписками пользователей
-
+servers:
+  - url: http://localhost:8080
+    description: Dev server
 paths:
   /subscriptions:
     post:
@@ -141,10 +143,13 @@ components:
           type: integer
         user_id:
           type: string
+          format: uuid
         start_date:
           type: string
+          format: date
         end_date:
           type: string
+          format: date
 
     SubscriptionCreate:
       type: object
@@ -160,7 +165,10 @@ components:
           type: integer
         user_id:
           type: string
+          format: uuid
         start_date:
           type: string
+          format: date
         end_date:
           type: string
+          format: date
